@@ -1,0 +1,65 @@
+1.9.0 beta 3
+
+1.9.0 beta 2
+Added export data from DataGrid to CSV file.
+Added Menuitem "Show/Hide All Curves"
+Fixed improper display of modal dialog boxes.
+Fixed Appcrash caused by non-numeric values in the "Change Y scale" dialog box.
+
+1.9.0 beta 1
+Added support for RDB format logs.
+
+1.8.3
+The caption of the main form now displays the number of entries in the logfile.
+New filters in the OpenFile dialog.
+Enabled "ReadOnly" property in the data grid.
+Minor bug fixes.
+
+1.8.2
+Information on command-line options moved to the "Info" window (temporary solution).
+Added   ability to rearrange columns in the DataGrid.
+Fixed display error in fullscreen mode.
+Added "Full Screen" button.
+Logparser code improvements.
+
+1.8.1
+Added PrintDialog.
+Added visualization of toolbar button pressed state.
+Minor code changes.
+
+1.8.0.1
+Initial Release.
+.NET version requirements upgraded to 3.5
+ZedGraph updated to 5.1.7
+-------------------------------------------------------------
+1.9.0 beta 2
+Добавлен экспорт данных таблицы в файл формата CSV.
+Добавлен пункт меню "Show/Hide All Curves".
+Исправлено нефеншуйное отображение модальных диалогов.
+Исправлено падение приложения, вызванное вводом нечисловых значений в диалоге "Change Y scale".
+
+1.9.0 beta1
+Добавлена поддержка логов формата RDB.
+
+1.8.3
+В заголовок окна выведено кол-во записей (точек) в логе.
+Правка фильтров диалога OpenFile.
+Включено свойство ReadOnly в таблице данных.
+Мелкие багфиксы.
+
+1.8.2
+Инофрмация по параметрам командной строки перенесена в окно "Инфо" (временное решение).
+Добавлена возможность перестановки столбцов в таблице данных.
+Исправлена ошибка отображения в полноэкранном режиме.
+Добавлена кнопка "Во весь экран".
+Оптимизация парсера файла, интерфейса.
+
+1.8.1
+Добавлен диалог выбора принтера.
+Добавлена визуализация нажатия кнопок на панели инструментов.
+Незначительные правки фейса и кода.
+
+1.8.0.1
+Первая сборка.
+Версия .NET повышена до 3.5
+Обновлена графическая библиотека до 5.1.7

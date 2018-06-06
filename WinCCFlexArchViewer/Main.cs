@@ -258,7 +258,7 @@ namespace WinCCFlexLogViewer
 				}
 			}   //EndOfForeach
 
-            datapointCounter = timeList.Count;  //немного оптимизации, получим число записей сразу, без цикла
+            datapointCounter = timeList.Count;  // получим число записей сразу, без цикла
             table = new DataTable();
 			DataColumn dataColumn = new DataColumn();
 			dataColumn.DataType = Type.GetType("System.String");
@@ -320,7 +320,7 @@ namespace WinCCFlexLogViewer
 					}
 				}
             } //EndOfForeach
-            goodRecCounter = table.Rows.Count;  //немного оптимизации, получим число записей сразу, без цикла
+            goodRecCounter = table.Rows.Count;  // получим число записей сразу, без цикла
         }
 
 		// 
@@ -441,6 +441,7 @@ namespace WinCCFlexLogViewer
         {
             ((ToolStripMenuItem)sender).Checked = DTrend.GraphPane.CurveList[((ToolStripMenuItem)sender).OwnerItem.Text].IsVisible;
         }
+
         // Event handler for Dropdown MenuItem "show/hide ALL Curves"
         private void toggleAllCurves(object sender, EventArgs e)
         {

@@ -35,7 +35,7 @@ namespace WinCCFlexLogViewer
                 {
                     Text = value.ToString();
                 }
-                else MessageBox.Show("Error paste");
+                else MessageBox.Show("Only Number Allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -44,13 +44,13 @@ namespace WinCCFlexLogViewer
             double d = 0.0;
             if (Text == String.Empty)
             {
-                MessageBox.Show("Empty Value Not Allowed");
+                MessageBox.Show("Empty Value Not Allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ok = false;
             }
             else
             {
                 ok = double.TryParse(this.Text, out d);
-                if (ok == false) MessageBox.Show("Only Number Allowed");
+                if (ok == false) MessageBox.Show("Only Number Allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             return d;
         }

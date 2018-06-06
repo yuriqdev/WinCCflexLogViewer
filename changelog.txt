@@ -1,4 +1,7 @@
 1.9.0 beta 3
+Added Tooltips for menu buttons.
+Minor code improvements.
+Removed unused code.
 
 1.9.0 beta 2
 Added export data from DataGrid to CSV file.
@@ -16,7 +19,7 @@ Enabled "ReadOnly" property in the data grid.
 Minor bug fixes.
 
 1.8.2
-Information on command-line options moved to the "Info" window (temporary solution).
+Information on command-line options moved to the "About" window (temporary solution).
 Added   ability to rearrange columns in the DataGrid.
 Fixed display error in fullscreen mode.
 Added "Full Screen" button.

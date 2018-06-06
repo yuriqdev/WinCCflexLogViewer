@@ -73,6 +73,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 2, 2);
+            this.menuStrip1.ShowItemToolTips = true;
             this.menuStrip1.Size = new System.Drawing.Size(846, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -83,6 +84,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.ToolTipText = "Open data log file";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // togleTableToolStripMenuItem
@@ -91,6 +93,7 @@
             this.togleTableToolStripMenuItem.Name = "togleTableToolStripMenuItem";
             this.togleTableToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
             this.togleTableToolStripMenuItem.Text = "toggle table";
+            this.togleTableToolStripMenuItem.ToolTipText = "Toggle  table view";
             this.togleTableToolStripMenuItem.Click += new System.EventHandler(this.togleTableToolStripMenuItem_Click);
             // 
             // hideshowcurveMenuItem
@@ -106,6 +109,7 @@
             this.printMenuItem.Name = "printMenuItem";
             this.printMenuItem.Size = new System.Drawing.Size(60, 20);
             this.printMenuItem.Text = "print";
+            this.printMenuItem.ToolTipText = "Print Graph";
             this.printMenuItem.Click += new System.EventHandler(this.printMenuItem_Click);
             // 
             // lockunlockvzoomMenuItem
@@ -115,6 +119,7 @@
             this.lockunlockvzoomMenuItem.Name = "lockunlockvzoomMenuItem";
             this.lockunlockvzoomMenuItem.Size = new System.Drawing.Size(131, 20);
             this.lockunlockvzoomMenuItem.Text = "lock vertical zoom";
+            this.lockunlockvzoomMenuItem.ToolTipText = "Toggle Y-axis zoom lock";
             this.lockunlockvzoomMenuItem.Click += new System.EventHandler(this.lockunlockvzoomMenuItem_Click);
             // 
             // ExitStripMenuItem
@@ -134,6 +139,7 @@
             this.aboutMenuItem.Name = "aboutMenuItem";
             this.aboutMenuItem.Size = new System.Drawing.Size(38, 20);
             this.aboutMenuItem.Text = " ";
+            this.aboutMenuItem.ToolTipText = "About";
             this.aboutMenuItem.Click += new System.EventHandler(this.aboutMenuItem_Click);
             // 
             // ControlsStripMenuItem
@@ -142,6 +148,7 @@
             this.ControlsStripMenuItem.Name = "ControlsStripMenuItem";
             this.ControlsStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.ControlsStripMenuItem.Text = "controls";
+            this.ControlsStripMenuItem.ToolTipText = "Toggle Control pad";
             this.ControlsStripMenuItem.Click += new System.EventHandler(this.ControlsStripMenuItem_Click);
             // 
             // fullscreenToolStripMenuItem
@@ -150,6 +157,7 @@
             this.fullscreenToolStripMenuItem.Name = "fullscreenToolStripMenuItem";
             this.fullscreenToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
             this.fullscreenToolStripMenuItem.Text = "fullscreen";
+            this.fullscreenToolStripMenuItem.ToolTipText = "Toggle fullscreen mode";
             this.fullscreenToolStripMenuItem.Click += new System.EventHandler(this.fullscreenToolStripMenuItem_Click);
             // 
             // SaveCSVMenuItem
@@ -158,6 +166,7 @@
             this.SaveCSVMenuItem.Name = "SaveCSVMenuItem";
             this.SaveCSVMenuItem.Size = new System.Drawing.Size(79, 20);
             this.SaveCSVMenuItem.Text = "Save csv";
+            this.SaveCSVMenuItem.ToolTipText = "Save Table data to CSV file";
             this.SaveCSVMenuItem.Click += new System.EventHandler(this.SaveCSVMenuItem_Click);
             // 
             // openFileDialog1

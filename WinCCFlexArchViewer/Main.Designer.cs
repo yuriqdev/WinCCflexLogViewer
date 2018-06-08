@@ -91,8 +91,8 @@
             // 
             this.togleTableToolStripMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.glyphicons_120_table;
             this.togleTableToolStripMenuItem.Name = "togleTableToolStripMenuItem";
-            this.togleTableToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.togleTableToolStripMenuItem.Text = "toggle table";
+            this.togleTableToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.togleTableToolStripMenuItem.Text = "Table";
             this.togleTableToolStripMenuItem.ToolTipText = "Toggle  table view";
             this.togleTableToolStripMenuItem.Click += new System.EventHandler(this.togleTableToolStripMenuItem_Click);
             // 
@@ -100,15 +100,15 @@
             // 
             this.hideshowcurveMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.glyphicons_115_list;
             this.hideshowcurveMenuItem.Name = "hideshowcurveMenuItem";
-            this.hideshowcurveMenuItem.Size = new System.Drawing.Size(123, 20);
-            this.hideshowcurveMenuItem.Text = "show/hide curve";
+            this.hideshowcurveMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.hideshowcurveMenuItem.Text = "Curves";
             // 
             // printMenuItem
             // 
             this.printMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.glyphicons_16_print;
             this.printMenuItem.Name = "printMenuItem";
             this.printMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.printMenuItem.Text = "print";
+            this.printMenuItem.Text = "Print";
             this.printMenuItem.ToolTipText = "Print Graph";
             this.printMenuItem.Click += new System.EventHandler(this.printMenuItem_Click);
             // 
@@ -117,8 +117,8 @@
             this.lockunlockvzoomMenuItem.CheckOnClick = true;
             this.lockunlockvzoomMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.glyphicons_242_flash;
             this.lockunlockvzoomMenuItem.Name = "lockunlockvzoomMenuItem";
-            this.lockunlockvzoomMenuItem.Size = new System.Drawing.Size(131, 20);
-            this.lockunlockvzoomMenuItem.Text = "lock vertical zoom";
+            this.lockunlockvzoomMenuItem.Size = new System.Drawing.Size(134, 20);
+            this.lockunlockvzoomMenuItem.Text = "Lock vertical zoom";
             this.lockunlockvzoomMenuItem.ToolTipText = "Toggle Y-axis zoom lock";
             this.lockunlockvzoomMenuItem.Click += new System.EventHandler(this.lockunlockvzoomMenuItem_Click);
             // 
@@ -146,8 +146,8 @@
             // 
             this.ControlsStripMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.glyphicons_589_remote_control_tv;
             this.ControlsStripMenuItem.Name = "ControlsStripMenuItem";
-            this.ControlsStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.ControlsStripMenuItem.Text = "controls";
+            this.ControlsStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.ControlsStripMenuItem.Text = "Controls";
             this.ControlsStripMenuItem.ToolTipText = "Toggle Control pad";
             this.ControlsStripMenuItem.Click += new System.EventHandler(this.ControlsStripMenuItem_Click);
             // 
@@ -155,8 +155,8 @@
             // 
             this.fullscreenToolStripMenuItem.Image = global::WinCCFlexLogViewer.Properties.Resources.fullscreen2;
             this.fullscreenToolStripMenuItem.Name = "fullscreenToolStripMenuItem";
-            this.fullscreenToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
-            this.fullscreenToolStripMenuItem.Text = "fullscreen";
+            this.fullscreenToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.fullscreenToolStripMenuItem.Text = "Fullscreen";
             this.fullscreenToolStripMenuItem.ToolTipText = "Toggle fullscreen mode";
             this.fullscreenToolStripMenuItem.Click += new System.EventHandler(this.fullscreenToolStripMenuItem_Click);
             // 
@@ -343,7 +343,6 @@
             this.loadingpanel.Size = new System.Drawing.Size(846, 454);
             this.loadingpanel.TabIndex = 1;
             this.loadingpanel.Visible = false;
-            this.loadingpanel.Paint += new System.Windows.Forms.PaintEventHandler(this.loadingpanel_Paint);
             // 
             // progress_counter_textlabel
             // 
@@ -366,6 +365,7 @@
             // DTrend
             // 
             this.DTrend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DTrend.IsEnableSelection = true;
             this.DTrend.Location = new System.Drawing.Point(0, 0);
             this.DTrend.Margin = new System.Windows.Forms.Padding(0);
             this.DTrend.Name = "DTrend";

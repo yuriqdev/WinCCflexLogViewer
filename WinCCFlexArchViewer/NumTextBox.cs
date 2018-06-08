@@ -19,7 +19,7 @@ namespace WinCCFlexLogViewer
             }
 
             if (e.KeyChar != 22)
-                e.Handled = !Char.IsDigit(e.KeyChar) && (e.KeyChar != ',' || (this.Text.Contains(",") && !this.SelectedText.Contains(","))) && e.KeyChar != (char)Keys.Back && (e.KeyChar != '-' || this.SelectionStart != 0 || (this.Text.Contains("-") && !this.SelectedText.Contains("-")));
+                e.Handled = !char.IsDigit(e.KeyChar) && (e.KeyChar != ',' || (Text.Contains(",") && !SelectedText.Contains(","))) && e.KeyChar != (char)Keys.Back && (e.KeyChar != '-' || SelectionStart != 0 || (Text.Contains("-") && !SelectedText.Contains("-")));
         }
 
         protected override void WndProc(ref Message m)

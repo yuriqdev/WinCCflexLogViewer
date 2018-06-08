@@ -55,6 +55,7 @@ namespace WinCCFlexLogViewer
             DTrend.GraphPane.Y2Axis.MinorTic.IsOpposite = false;
             DTrend.GraphPane.Y2Axis.IsVisible = false;
             DTrend.GraphPane.X2Axis.IsVisible = false;
+            DTrend.Selection.SelectionChangedEvent += new EventHandler(Selection_SelectionChangedEvent);
             DTrend.GraphPane.AxisChange();
             DTrend.Refresh();
 			string[] commandLineArgs = Environment.GetCommandLineArgs();
@@ -72,7 +73,7 @@ namespace WinCCFlexLogViewer
 						if (File.Exists(path))
 						{
                             loadingpanel.Visible = true;
-                            csv_file = path;
+                            log_file = path;
                             startparsing();
                         }
 					}
@@ -100,7 +101,7 @@ namespace WinCCFlexLogViewer
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
                 loadingpanel.Visible = true;
-                csv_file = openFileDialog1.FileName;
+                log_file = openFileDialog1.FileName;
                 startparsing();
 			}
 		}
@@ -115,7 +116,7 @@ namespace WinCCFlexLogViewer
             centerLoadingAnnimation();
 			BackgroundWorker backgroundWorker = new BackgroundWorker();
 			backgroundWorker.WorkerSupportsCancellation = true;
-            if (Path.GetExtension(csv_file) != ".rdb")
+            if (Path.GetExtension(log_file) != ".rdb")
                 backgroundWorker.DoWork += parse_data;
             else
                 backgroundWorker.DoWork += startparsingSQL;
@@ -133,7 +134,7 @@ namespace WinCCFlexLogViewer
             dataColumn.ColumnName = "Date Time";
             table.Columns.Add(dataColumn);  //добавляем столбец Дата-Время
 
-            SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=" + csv_file + ";Version=3;");
+            SQLiteConnection m_dbConn = new SQLiteConnection("Data Source=" + log_file + ";Version=3;");
             try
             {
                 m_dbConn.Open();
@@ -190,7 +191,7 @@ namespace WinCCFlexLogViewer
 			List<string> list = new List<string>();
 			try
 			{    // Чтение файла построчно в список
-				StreamReader streamReader = new StreamReader(new FileStream(csv_file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.Default);
+				StreamReader streamReader = new StreamReader(new FileStream(log_file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.Default);
 				string item;
 				while ( (item = streamReader.ReadLine()) != null )
 				{
@@ -280,10 +281,9 @@ namespace WinCCFlexLogViewer
 			flag = 0;
 			foreach (string text5 in list)   //
 			{
-				if (flag == 0) flag++;  // сделано для пропуска первой строки в списке - Заголовок лога
+				if (flag == 0) flag++;  //
 				else
 				{
-				//	flag++;   //Скорее всего это не нужно
 					string[] array2 = text5.Split( new char[]{c} );  // Получаем массив элементов из строки списка лога
                     if (array2.Length == 5 && array2[0].IndexOf("\"\"") == -1)
 					{
@@ -325,7 +325,14 @@ namespace WinCCFlexLogViewer
 
 		// 
 		private void dataparsing_complete(object sender, RunWorkerCompletedEventArgs e)
-		{   if(goodRecCounter==0) { MessageBox.Show("File contains no data"); panel1.Hide(); progress_timer.Enabled = false; return; }
+		{
+            if (goodRecCounter==0)
+            {
+                MessageBox.Show("File contains no data");
+                panel1.Hide();
+                progress_timer.Enabled = false;
+                return;
+            }
             dataGridView_data.DataSource = table;
             dataGridView_data.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 			int numColor = 0;
@@ -398,7 +405,7 @@ namespace WinCCFlexLogViewer
 			int num3 = 0;
 			foreach (DateTime dateTime in timeList)
 			{
-				array[num3] = dateTime.ToString();
+				array[num3] = dateTime.ToString().Replace(" ", "\n");
 				num3++;
 			}
             DTrend.GraphPane.XAxis.Scale.Max = (double)num3;
@@ -422,8 +429,8 @@ namespace WinCCFlexLogViewer
 				if (yaxis.Title.Text.IndexOf(((ToolStripMenuItem)sender).OwnerItem.Text) != -1)
 				{
 					YScaleSettings yscaleSettings = new YScaleSettings(yaxis.Scale.Min, yaxis.Scale.Max, ((ToolStripMenuItem)sender).OwnerItem.Text);
-					yscaleSettings.ShowDialog();
-					if (yscaleSettings.set)
+					yscaleSettings.ShowDialog(); 
+                    if (yscaleSettings.set)
 					{
 						yaxis.Scale.MaxAuto = false;
 						yaxis.Scale.MinAuto = false;
@@ -507,35 +514,18 @@ namespace WinCCFlexLogViewer
                 lockunlockvzoomMenuItem.BackColor = SystemColors.Control;
         }
 
-		// Print proc
+		// Toolbar Print button click
 		private void printMenuItem_Click(object sender, EventArgs e)
 		{
-			using (PrintDocument printDocument = new PrintDocument())
-			{
-                printDlg.Document = printDocument; //yur
-                printDlg.AllowSelection = true;  //yur
-                printDlg.AllowSomePages = true;  //yur
-                //
-                printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-				printDocument.OriginAtMargins = false;
-				printDocument.DefaultPageSettings.Landscape = true;
-				printDocument.PrintPage += delegate(object _, PrintPageEventArgs o)
-				{
-					double num = 39.370078740157481;
-					Image image = DTrend.MasterPane.GetImage();
-					o.Graphics.DrawImage(image, (float)(1.0 * num), (float)(1.0 * num), (float)(27.0 * num), (float)(18.0 * num));
-					o.HasMorePages = false;
-				};
-                if (printDlg.ShowDialog() == DialogResult.OK)  //yur
-                    printDocument.Print();
-			}
-		}
+            DoPrint();
+        }
 
 		//
 		private void aboutMenuItem_Click(object sender, EventArgs e)
 		{
 			About about = new About();
 			about.ShowDialog();
+            about.Dispose();
 		}
 
 		//
@@ -544,7 +534,7 @@ namespace WinCCFlexLogViewer
 			Application.Exit();
 		}
 
-        // ToggleFullScreenButton Click
+        // Toolbar ToggleFullScreen Button Click
         private void fullscreenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (FormBorderStyle == FormBorderStyle.Sizable)
@@ -636,27 +626,14 @@ namespace WinCCFlexLogViewer
             DTrend.Refresh();
 		}
 
-		//
+		// ControlPad print button click
 		private void button_print_Click(object sender, EventArgs e)
 		{
-			using (PrintDocument printDocument = new PrintDocument())
-			{
-				printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-				printDocument.OriginAtMargins = false;
-				printDocument.DefaultPageSettings.Landscape = true;
-				printDocument.PrintPage += delegate(object _, PrintPageEventArgs o)
-				{
-					double num = 39.370078740157481;
-					Image image = DTrend.MasterPane.GetImage();
-					o.Graphics.DrawImage(image, (float)(1.0 * num), (float)(1.0 * num), (float)(27.0 * num), (float)(18.0 * num));
-					o.HasMorePages = false;
-				};
-				printDocument.Print();
-			}
-		}
+            DoPrint();
+        }
 
-		//
-		private void DTrend_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
+        //
+        private void DTrend_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
 		{
             griddatascroll();
 		}
@@ -707,13 +684,50 @@ namespace WinCCFlexLogViewer
             centerLoadingAnnimation();
 		}
 
-		//
-		private void loadingpanel_Paint(object sender, PaintEventArgs e)
-		{
-		}
+        //
+        private void SaveCSVMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_data.RowCount <= 0)    //test to see if the DataGridView has any rows
+            {
+                MessageBox.Show("DataGrid contains no data\nNothing to save :)");
+                return;
+            }
+            var sfd = new SaveFileDialog();
+            sfd.Filter = "CSV files (*.csv)|*.csv";
+            sfd.FileName = "table.csv";
+            if (sfd.ShowDialog() != DialogResult.OK) return;
 
-		// Массив цветов для графиков
-		public string[] colors = new string[]
+            string value = String.Empty;
+            StreamWriter swOut = new StreamWriter(sfd.FileName, false);
+
+            foreach (DataGridViewColumn dc in dataGridView_data.Columns)
+            {
+                value += dc.Name + ";";
+            }
+            value = value.Substring(0, value.Length - 1) + Environment.NewLine;
+            swOut.Write(value);
+            value = String.Empty;
+
+            foreach (DataGridViewRow ddr in dataGridView_data.Rows)
+            {
+                if (ddr.IsNewRow)
+                    continue;
+                foreach (DataGridViewCell dc in ddr.Cells)
+                {
+                    if (dc.Value != null)
+                    {
+                        value += dc.Value.ToString() + ";";
+                    }
+                }
+                value = value.Substring(0, value.Length - 1) + Environment.NewLine;
+                swOut.Write(value);
+                value = "";
+            }
+            swOut.Close();
+        }
+
+        // Массив цветов для графиков
+        public string[] colors = new string[]
 		{
 			"#00FF00",  // Lime ярко желто-зеленый
 			"#0000FF",  // Blue ярко синий
@@ -775,7 +789,7 @@ namespace WinCCFlexLogViewer
 		};
 
 		// Имя открытого файла лога
-		private string csv_file = "";
+		private string log_file = "";
 		//
 		private SortedList<string, PointPairList> data_graph = new SortedList<string, PointPairList>();
 		//
@@ -791,45 +805,40 @@ namespace WinCCFlexLogViewer
 		// Количество "полезных" записей  (равно общее кол-во строк минус заголовок минус записи служебных тегов Скады)
 		private int goodRecCounter;
 
-        private void SaveCSVMenuItem_Click(object sender, EventArgs e)
+
+        private void DoPrint()
         {
-            if (dataGridView_data.RowCount <= 0)    //test to see if the DataGridView has any rows
+            using (PrintDocument printDocument = new PrintDocument())
             {
-                MessageBox.Show("DataGrid contains no data\nNothing to save :)");
-                return;
-            }
-            var sfd = new SaveFileDialog();
-            sfd.Filter = "CSV files (*.csv)|*.csv";
-            sfd.FileName = "table.csv";
-            if (sfd.ShowDialog() != DialogResult.OK) return;
+                printDlg.Document = printDocument;
+                printDlg.AllowSelection = true;
+                printDlg.AllowSomePages = true;
 
-            string value = String.Empty;
-            StreamWriter swOut = new StreamWriter(sfd.FileName, false);
-
-            foreach (DataGridViewColumn dc in dataGridView_data.Columns)
-            {
-                value += dc.Name + ";";
-            }
-            value = value.Substring(0, value.Length - 1) + Environment.NewLine;
-            swOut.Write(value);
-            value = String.Empty;
-
-            foreach (DataGridViewRow ddr in dataGridView_data.Rows)
-            {
-                if (ddr.IsNewRow)
-                    continue;
-                foreach (DataGridViewCell dc in ddr.Cells)
+                printDocument.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
+                printDocument.OriginAtMargins = false;
+                printDocument.DefaultPageSettings.Landscape = true;
+                printDocument.PrintPage += delegate (object _, PrintPageEventArgs o)
                 {
-                    if (dc.Value != null)
-                    {
-                        value += dc.Value.ToString() + ";";
-                    }
-                }
-                value = value.Substring(0, value.Length - 1) + Environment.NewLine;
-                swOut.Write(value);
-                value = "";
+                    double num = 39.370078740157481;
+                    Image image = DTrend.MasterPane.GetImage();
+                    o.Graphics.DrawImage(image, (float)(1.0 * num), (float)(1.0 * num), (float)(27.0 * num), (float)(18.0 * num));
+                    o.HasMorePages = false;
+                };
+                if (printDlg.ShowDialog() == DialogResult.OK)
+                    printDocument.Print();
             }
-            swOut.Close();
+        }
+
+        private void Selection_SelectionChangedEvent(object sender, EventArgs e)
+        {//zedGraph.Selection 
+            foreach (var curve in DTrend.GraphPane.CurveList)
+            {
+                if (curve.IsSelected)
+                {
+                    curve.IsSelected = false;
+                }
+            }
+
         }
     }
 }

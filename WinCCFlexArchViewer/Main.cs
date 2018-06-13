@@ -58,10 +58,9 @@ namespace WinCCFlexLogViewer
             DTrend.Selection.SelectionChangedEvent += new EventHandler(Selection_SelectionChangedEvent);
             DTrend.GraphPane.AxisChange();
             DTrend.Refresh();
-			string[] commandLineArgs = Environment.GetCommandLineArgs();
-			
-            //  Парсинг аргументов командной строки
-			for (int i = 0; i < commandLineArgs.Length; i++)
+			string[] commandLineArgs = Environment.GetCommandLineArgs();	
+            
+			for (int i = 0; i < commandLineArgs.Length; i++)    //  Парсинг аргументов командной строки
 			{
                 string path = "";
                 string a = commandLineArgs[i];
@@ -83,14 +82,13 @@ namespace WinCCFlexLogViewer
                     FormBorderStyle = FormBorderStyle.None;
                     WindowState = FormWindowState.Maximized;
 				}
-				else if (a == "-hidefilebutton")
+				else if (a == "-nofilebutton")
 				{
                     fileToolStripMenuItem.Visible = false;
 				}
-				else if (a == "-hideprintbutton")
+				else if (a == "-noprintbutton")
 				{
-                    printMenuItem.Visible = false;
-                    button_print.Visible = false;
+                    printMenuItem.Visible = button_print.Visible = false;
                 }
 			}
 		}
@@ -281,7 +279,7 @@ namespace WinCCFlexLogViewer
 			flag = 0;
 			foreach (string text5 in list)   //
 			{
-				if (flag == 0) flag++;  //
+				if (flag == 0) flag++;
 				else
 				{
 					string[] array2 = text5.Split( new char[]{c} );  // Получаем массив элементов из строки списка лога
@@ -357,13 +355,14 @@ namespace WinCCFlexLogViewer
 					}
 					num2++;
 				}
+                Color color = ColorTranslator.FromHtml(colors[numColor]);
 				YAxis yaxis = new YAxis(text);
                 DTrend.GraphPane.YAxisList.Add(yaxis);
 				yaxis.Title.IsVisible = true;
 				yaxis.Type = AxisType.Linear;
-				yaxis.Color = ColorTranslator.FromHtml(colors[numColor]);
+				yaxis.Color = color;
 				yaxis.Scale.FontSpec.Size = 10f;
-				yaxis.Scale.FontSpec.FontColor = ColorTranslator.FromHtml(colors[numColor]);
+                yaxis.Scale.FontSpec.FontColor = color;
 				yaxis.IsVisible = true;
 				yaxis.Scale.MaxAuto = true;
 				yaxis.Scale.MinAuto = true;
@@ -375,13 +374,13 @@ namespace WinCCFlexLogViewer
 				yaxis.MinorTic.IsOpposite = false;
 				yaxis.Scale.Align = AlignP.Inside;
 				yaxis.Title.FontSpec.Size = 10f;
-				yaxis.Title.FontSpec.FontColor = ColorTranslator.FromHtml(colors[numColor]);  
-				Color color = ColorTranslator.FromHtml(colors[numColor]);
+				yaxis.Title.FontSpec.FontColor = color; 
+                
 				LineItem lineItem = DTrend.GraphPane.AddCurve(text, pointPairList, color, SymbolType.None);
 				lineItem.Line.IsOptimizedDraw = true;
 				lineItem.Line.Width = 2f;
 				lineItem.YAxisIndex = DTrend.GraphPane.YAxisList.IndexOf(text);   
-                dataGridView_data.Columns[text].DefaultCellStyle.ForeColor = ColorTranslator.FromHtml(colors[numColor]);
+                dataGridView_data.Columns[text].DefaultCellStyle.ForeColor = color;
 				ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(text);
 				toolStripMenuItem.ForeColor = ColorTranslator.FromHtml(colors[numColor]);
 				ToolStripMenuItem toolStripMenuItem2 = new ToolStripMenuItem("hide/show");
@@ -443,7 +442,7 @@ namespace WinCCFlexLogViewer
             DTrend.Refresh();
 		}
 
-        //
+        //Устанавливает чек итема в соответствии с видимостью курвы
         private void toolMnuItemChSta(object sender, EventArgs e)
         {
             ((ToolStripMenuItem)sender).Checked = DTrend.GraphPane.CurveList[((ToolStripMenuItem)sender).OwnerItem.Text].IsVisible;
@@ -546,8 +545,7 @@ namespace WinCCFlexLogViewer
             {
                 FormBorderStyle = FormBorderStyle.Sizable;
                 WindowState = FormWindowState.Normal;
-            }
-            
+            }   
         }
 
         // 
@@ -838,7 +836,6 @@ namespace WinCCFlexLogViewer
                     curve.IsSelected = false;
                 }
             }
-
         }
     }
 }

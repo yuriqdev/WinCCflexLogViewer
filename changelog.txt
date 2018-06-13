@@ -1,4 +1,5 @@
 1.9
+Simplified commandline args.
 XAxis labels are now showing in 2 lines.
 Other  UI fixes.
 

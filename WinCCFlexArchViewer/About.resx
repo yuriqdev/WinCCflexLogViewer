@@ -120,14 +120,14 @@
   <data name="label4.Text" xml:space="preserve">
     <value>Mouse Controls:
 Pan:                       mouse wheel button
-Zoom In/Out:       mouse wheel
+Zoom In/Out:        mouse wheel
 Zoom Selection:   mouse left
-Menu:                    mouse right button
+Menu:                     mouse right button
 
 Command line  arguments:
 -f "filename"          open specified file
 -fullscreen             start  in fullscreen mode
--hidefilebutton      hide  openfile button
--hideprintbutton   hide print button</value>
+-nofilebutton         hide  openfile button
+-noprintbutton      hide print button</value>
   </data>
 </root>

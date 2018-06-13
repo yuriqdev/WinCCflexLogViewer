@@ -84,7 +84,7 @@
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.fileToolStripMenuItem.Text = "File";
-            this.fileToolStripMenuItem.ToolTipText = "Open data log file";
+            this.fileToolStripMenuItem.ToolTipText = "Import data log file";
             this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // togleTableToolStripMenuItem

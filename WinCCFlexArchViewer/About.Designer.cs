@@ -21,6 +21,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.button1 = new System.Windows.Forms.Button();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.lblBuild = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,9 +42,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(151, 6);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(213, 16);
+            this.label1.Size = new System.Drawing.Size(225, 16);
             this.label1.TabIndex = 1;
-            this.label1.Text = "WinCC flexible Log Viewer 1.9";
+            this.label1.Text = "WinCC flexible Log Viewer 1.9.1";
             // 
             // label3
             // 
@@ -97,12 +98,22 @@
             this.linkLabel2.TabIndex = 8;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "https://github.com/yuriqdev";
+            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            // 
+            // lblBuild
+            // 
+            this.lblBuild.AutoSize = true;
+            this.lblBuild.Location = new System.Drawing.Point(13, 129);
+            this.lblBuild.Name = "lblBuild";
+            this.lblBuild.Size = new System.Drawing.Size(91, 13);
+            this.lblBuild.TabIndex = 9;
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 265);
+            this.Controls.Add(this.lblBuild);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.linkLabel1);
@@ -125,17 +136,13 @@
 		}
 		// 
 		private System.ComponentModel.IContainer components;
-		//2
 		private System.Windows.Forms.PictureBox pictureBox1;
-		//
 		private System.Windows.Forms.Label label1;
-		//
 		private System.Windows.Forms.Label label3;
-		//
 		private System.Windows.Forms.Label label4;
-		//
 		private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.Label lblBuild;
     }
 }

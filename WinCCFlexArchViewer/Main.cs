@@ -139,10 +139,10 @@ namespace WinCCFlexLogViewer
             }
             catch (SQLiteException ex)
             {
-                MessageBox.Show("NotOpen " + ex.ToString());
+                MessageBox.Show("Cannnot open the file " + ex.ToString());
             }
 
-            SQLiteCommand m_sqlCmd = new SQLiteCommand("SELECT DISTINCT  VarName from logdata where (VarName != '$RT_OFF$')", m_dbConn);
+            SQLiteCommand m_sqlCmd = new SQLiteCommand("SELECT DISTINCT  VarName FROM logdata WHERE (VarName != '$RT_OFF$')", m_dbConn);
             SQLiteDataReader reader = m_sqlCmd.ExecuteReader();
 
             channel_names = new List<string>();  // Список имен тегов
@@ -183,6 +183,7 @@ namespace WinCCFlexLogViewer
             m_dbConn.Dispose();
             goodRecCounter = table.Rows.Count;
         }
+
         //  Парсинг CSV файла лога
         private void parse_data(object sender, DoWorkEventArgs e)
 		{
@@ -318,7 +319,7 @@ namespace WinCCFlexLogViewer
 					}
 				}
             } //EndOfForeach
-            goodRecCounter = table.Rows.Count;  // получим число записей сразу, без цикла
+            goodRecCounter = table.Rows.Count;
         }
 
 		// 
@@ -326,7 +327,7 @@ namespace WinCCFlexLogViewer
 		{
             if (goodRecCounter==0)
             {
-                MessageBox.Show("File contains no data");
+                MessageBox.Show("LogFile contains no data");
                 panel1.Hide();
                 progress_timer.Enabled = false;
                 return;
@@ -338,9 +339,8 @@ namespace WinCCFlexLogViewer
 			{
 				PointPairList pointPairList = new PointPairList();
 				int num2 = 0;
-				foreach (object obj in table.Rows)
+				foreach (DataRow dataRow in table.Rows)
 				{
-					DataRow dataRow = (DataRow)obj;
 					if (dataRow[text].ToString() != "")
 					{
 						pointPairList.Add((double)num2, double.Parse(string.Concat(dataRow[text])));
@@ -360,7 +360,7 @@ namespace WinCCFlexLogViewer
                 DTrend.GraphPane.YAxisList.Add(yaxis);
 				yaxis.Title.IsVisible = true;
 				yaxis.Type = AxisType.Linear;
-				yaxis.Color = color;
+                yaxis.Color = Color.Black;  //color;
 				yaxis.Scale.FontSpec.Size = 10f;
                 yaxis.Scale.FontSpec.FontColor = color;
 				yaxis.IsVisible = true;
@@ -378,7 +378,7 @@ namespace WinCCFlexLogViewer
                 
 				LineItem lineItem = DTrend.GraphPane.AddCurve(text, pointPairList, color, SymbolType.None);
 				lineItem.Line.IsOptimizedDraw = true;
-				lineItem.Line.Width = 2f;
+				lineItem.Line.Width = 1f;
 				lineItem.YAxisIndex = DTrend.GraphPane.YAxisList.IndexOf(text);   
                 dataGridView_data.Columns[text].DefaultCellStyle.ForeColor = color;
 				ToolStripMenuItem toolStripMenuItem = new ToolStripMenuItem(text);
@@ -727,64 +727,64 @@ namespace WinCCFlexLogViewer
         // Массив цветов для графиков
         public string[] colors = new string[]
 		{
-			"#00FF00",  // Lime ярко желто-зеленый
-			"#0000FF",  // Blue ярко синий
+            "#0000FF",  // Blue ярко синий
 			"#000000",  // Black
 			"#FF0000",  // Red  
 			"#85A900",  //
 			"#006400",  // DarkGreen
-			"#010067",  // DarkBlue #00008B
+			"#FE8900",  //
 			"#95003A",  // светло-фиолетовый
-			"#007DB5",  // светло-голубой
+			"#FF0056",
+            "#007DB5",  // светло-голубой
 			"#FF00F6",  //
 			"#FF937E",  //
 			"#6A826C",  //
 			"#FF029D",  //
-			"#FE8900",  //
+			"#010067" ,  //
 			"#7A4782",
-			"#7E2DD2",			
+            "#7E2DD2",
             "#01FFFE",  // Cyan #00FFFF
-			"#FF0056",
-			"#A42400",
-			"#00AE7E",
-			"#683D3B",
-			"#BDC6FF",
-			"#263400",
-			"#BDD393",
-			"#00B917",
-			"#9E008E",
-			"#001544",
-			"#C28C9F",
-			"#FF74A3",
-			"#01D0FF",
-			"#004754",
-			"#E56FFE",
-			"#788231",
-			"#0E4CA1",
-			"#91D0CB",
-			"#BE9970",
-			"#968AE8",
-			"#BB8800",
-			"#43002C",
-			"#DEFF74",
-			"#00FFC6",
-			"#FFE502",
-			"#620E00",
-			"#008F9C",
-			"#98FF52",
-			"#7544B1",
-			"#B500FF",
-			"#00FF78",
-			"#FF6E41",
-			"#005F39",
-			"#6B6882",
-			"#5FAD4E",
-			"#A75740",
-			"#A5FFD2",
-			"#FFB167",
-			"#009BFF",
-			"#E85EBE"
-		};
+			"#00FF00",
+            "#A42400",
+            "#00AE7E",
+            "#683D3B",
+            "#BDC6FF",
+            "#263400",
+            "#BDD393",
+            "#00B917",
+            "#9E008E",
+            "#001544",
+            "#C28C9F",
+            "#FF74A3",
+            "#01D0FF",
+            "#004754",
+            "#E56FFE",
+            "#788231",
+            "#0E4CA1",
+            "#91D0CB",
+            "#BE9970",
+            "#968AE8",
+            "#BB8800",
+            "#43002C",
+            "#DEFF74",
+            "#00FFC6",
+            "#FFE502",
+            "#620E00",
+            "#008F9C",
+            "#98FF52",
+            "#7544B1",
+            "#B500FF",
+            "#00FF78",
+            "#FF6E41",
+            "#005F39",
+            "#6B6882",
+            "#5FAD4E",
+            "#A75740",
+            "#A5FFD2",
+            "#FFB167",
+            "#009BFF",
+            "#E85EBE"
+        };
 
 		// Имя открытого файла лога
 		private string log_file = "";
@@ -829,10 +829,11 @@ namespace WinCCFlexLogViewer
 
         private void Selection_SelectionChangedEvent(object sender, EventArgs e)
         {//zedGraph.Selection 
-            foreach (var curve in DTrend.GraphPane.CurveList)
+            foreach (LineItem curve in DTrend.GraphPane.CurveList)
             {
                 if (curve.IsSelected)
                 {
+                    curve.Line.Width = (curve.Line.Width == 1f) ? 3f :  1f;
                     curve.IsSelected = false;
                 }
             }

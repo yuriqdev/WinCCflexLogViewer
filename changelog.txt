@@ -1,6 +1,13 @@
+1.9.1
+Graph ColorSet optimized for better look.
+Y-Axis are now all shown in black.
+Curve width was redused to 1.0
+Added ability to select\unselect curves by Shift+LeftButton click.
+Code cleanup.
+
 1.9
 Simplified commandline args.
-XAxis labels are now showing in 2 lines.
+X-Axis labels are now showing in 2 lines.
 Other  UI fixes.
 
 1.9.0 beta 3
@@ -10,12 +17,12 @@ Removed unused code.
 
 1.9.0 beta 2
 Added export data from DataGrid to CSV file.
-Added Menuitem "Show/Hide All Curves"
+Added Menu Item "Show/Hide All Curves"
 Fixed improper display of modal dialog boxes.
 Fixed Appcrash caused by non-numeric values in the "Change Y scale" dialog box.
 
 1.9.0 beta 1
-Added support for RDB format logs.
+Added support for Siemens SQLite (*.RDB) format logs.
 
 1.8.3
 The caption of the main form now displays the number of entries in the logfile.

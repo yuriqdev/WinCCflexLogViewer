@@ -1,8 +1,10 @@
 # WinCCflexLogViewer
 
-WinCCflexLogViewer is a lightweight and simple-to-use WinCC Flexible and TIA Portal Data log Viewer / Analyzer.
+WinCCflexLogViewer is a lightweight and simple-to-use archive Data log Viewer / Analyzer.
 
-Supports CSV (*.csv, *.txt) and SQLite (*.rdb) Siemens data log  formats.
+It is compatible with archives created with the WinCC (TIA Portal) Panel or PC Runtime as well as with the WinCC flexible Panel or PC Runtime.
+
+Supports CSV (*.csv, *.txt) and SQLite (*.rdb) Siemens data log formats.
 
 Allows to export parsed log data to CSV file (for further analysis, printing e.g.), print selected curves.
 
